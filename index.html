@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RS CYBER TEAM - TOOLS</title>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|VT323|Orbitron&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'VT323', monospace;
+            background: url('HACKED.gif') repeat center center fixed;
+            background-size: cover;
+            color: #0f0;
+            text-align: center;
+        }
+        header {
+            font-family: 'Press Start 2P', cursive;
+            background: rgba(0, 255, 0, 0.2);
+            padding: 15px;
+            font-size: 20px;
+            color: #0f0;
+            text-shadow: 0 0 10px #00ff00;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0.3; /* নোটিশ না ক্লোজ করলে ব্লার থাকবে */
+            pointer-events: none;
+        }
+        .tool {
+            background: rgba(0, 255, 0, 0.1);
+            border: 2px solid #0f0;
+            border-radius: 8px;
+            margin: 10px;
+            padding: 10px;
+            text-align: center;
+            width: 160px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 0 15px #0f0;
+        }
+        .tool:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px #00ff00;
+            background: rgba(0, 255, 0, 0.3);
+        }
+        .tool img {
+            width: 100%;
+            height: 100px;
+            border-radius: 5px;
+            border: 1px solid #0f0;
+        }
+        .tool a {
+            text-decoration: none;
+            color: #0f0;
+            font-size: 14px;
+            font-weight: bold;
+            display: block;
+            margin-top: 5px;
+        }
+        /* নোটিশ পপআপ স্টাইল */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 500px;
+            background: #111;
+            padding: 20px;
+            border: 2px solid #0f0;
+            text-align: center;
+            box-shadow: 0 0 15px #00ff00;
+            z-index: 9999;
+        }
+        .popup h2 {
+            font-size: 20px;
+            color: #ff0;
+            text-shadow: 0 0 10px #ff0;
+        }
+        .popup p {
+            font-size: 14px;
+            color: #0f0;
+        }
+        .popup button {
+            background: #0f0;
+            color: black;
+            font-size: 16px;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        .popup button:hover {
+            background: #00ff00;
+            box-shadow: 0 0 10px #00ff00;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- নোটিশ পপআপ -->
+    <div id="noticePopup" class="popup">
+        <h2>⚠️ গুরুত্বপূর্ণ নোটিশ ⚠️</h2>
+        <p>এই ওয়েবসাইটে যেসব টুল রয়েছে, সেগুলো **শুধুমাত্র এথিক্যাল পারপাসে** ব্যবহার করা যাবে।  
+        যদি কেউ এগুলো খারাপ কাজে ব্যবহার করেন, তাহলে **RS CYBER TEAM দায়ী থাকবে না**।  
+        আপনি কি একমত? </p>
+        <button onclick="closeNotice()">I Agree & Continue</button>
+    </div>
+
+    <header>RS CYBER TEAM - TOOLS</header>
+    
+    <div class="container">
+        <div class="tool">
+            <img src="XYLON/CUSTOM_SMS.png" alt="CUSTOM SMS">
+            <a href="TOOLS/CUSTOM-SMS.html">CUSTOM SMS</a>
+        </div>
+        <div class="tool">
+            <img src="XYLON/HGZY_HACK.png" alt="HGZY HACK">
+            <a href="TOOLS/HGZY-HACK.html">HGZY HACK</a>
+        </div>
+        <div class="tool">
+            <img src="XYLON/YouTube_Thumbnail_Downloader.png" alt="YOUTUBE THUMBNAIL DOWNLOADER">
+            <a href="TOOLS/YouTube-Thumbnail-Downloader.html">YOUTUBE THUMBNAIL DOWNLOADER</a>
+        </div>
+        <div class="tool">
+            <img src="XYLON/FACEBOOK_PROFILE_INFO.png" alt="FACEBOOK PROFILE INFO">
+            <a href="TOOLS/FACEBOOK-PROFILE-INFO.html">FACEBOOK PROFILE INFO</a>
+        </div>
+        <div class="tool">
+            <img src="XYLON/plp.png" alt="FREE PLP DOWNLOAD">
+            <a href="TOOLS/plp.html">FREE PLP DOWNLOAD </a>
+        </div>
+        <div class="tool">
+            <img src="XYLON/Unlimited Text Repeater.png" alt="UNLIMITED TEXT REPEATER">
+            <a href="TOOLS/Unlimited-Text-Repeater.html">UNLIMITED TEXT REPEATER</a>
+        </div>
+        <div class="tool">
+            <img src="XYLON/IP INFO.png" alt="IP INFO">
+            <a href="TOOLS/IP-INFO.html">IP INFO</a>
+        </div>
+        <div class="tool">
+            <img src="XYLON/SSC.png" alt="SSC">
+            <a href="SSC RESULT/ssc.html">SSC</a>
+        </div>
+        <div class="tool">
+            <img src="XYLON/Password Protected Link Generator.png" alt="PASSWORD PROTECTED LINK GENERATOR">
+            <a href="TOOLS/UPassword-Protected-URL-Generator.html">URL 🔐</a>
+        </div>
+        <div class="tool">
+            <img src="XYLON/Cool Image Uploader.png" alt="COOL IMAGE UPLOADER">
+            <a href="TOOLS/Cool-Image-Uploader.html">COOL IMAGE UPLOADER</a>
+        </div>
+        <div class="tool">
+            <img src="XYLON/BIN_Generator.png" alt="BIN GENERATOR">
+            <a href="TOOLS/BIN-Generator.html">BIN GENERATOR</a>
+        </div>
+
+    <footer>© 2025 TOOL COLLECTION. POWERED BY <a href="https://t.me/RS_CYBER_TEAM" style="color: #0f0; text-decoration: none;">RS CYBER TEAM</a></footer>
+
+    <script>
+        function closeNotice() {
+            document.getElementById("noticePopup").style.display = "none";
+            document.getElementById("toolsContainer").style.opacity = "1";
+            document.getElementById("toolsContainer").style.pointerEvents = "auto";
+        }
+    </script>
+
+</body>
+</html>
