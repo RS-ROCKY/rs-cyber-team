@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Thumbnail Downloader</title>
+    <style>
+        body {
+            background-color: black;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding: 20px;
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            background: black;
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #00ff00;
+            color: black;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #00cc00;
+        }
+        img {
+            margin-top: 20px;
+            width: 80%;
+            border: 2px solid #00ff00;
+        }
+        a {
+            color: #00ff00;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔰 YouTube Thumbnail Downloader</h1>
+    <p>🔗 ইউটিউব ভিডিও লিংক দিন:</p>
+    <input type="text" id="videoURL" placeholder="https://www.youtube.com/watch?v=XYZ123">
+    <br>
+    <button onclick="getThumbnail()">📥 থাম্বনেইল বের করুন</button>
+
+    <div id="thumbnail" style="display:none;">
+        <h2>📷 থাম্বনেইল:</h2>
+        <img id="thumbnailImg" src="" alt="Thumbnail">
+        <br>
+        <a id="downloadLink" download="thumbnail.jpg">
+            <button>⬇️ ডাউনলোড</button>
+        </a>
+    </div>
+
+    <script>
+        function getThumbnail() {
+            let url = document.getElementById("videoURL").value;
+            let videoID = url.split("v=")[1]?.split("&")[0] || url.split("/").pop();
+            
+            if (videoID) {
+                let thumbnailURL = `https://img.youtube.com/vi/${videoID}/maxresdefault.jpg`;
+                document.getElementById("thumbnailImg").src = thumbnailURL;
+                document.getElementById("downloadLink").href = thumbnailURL;
+                document.getElementById("thumbnail").style.display = "block";
+            } else {
+                alert("⚠️ সঠিক ইউটিউব লিংক দিন!");
+            }
+        }
+    </script>
+
+    <footer>
+        <p>Developer: <a href="https://t.me/RS_CYBER_TEAM" target="_blank">RS RABBY</a></p>
+    </footer>
+</body>
+</html>

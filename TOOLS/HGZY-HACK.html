@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HGZY HACK</title>
+    <style>
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px #fff, 0 0 10px #0f0, 0 0 15px #0f0; }
+            50% { text-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0; }
+            100% { text-shadow: 0 0 5px #fff, 0 0 10px #0f0, 0 0 15px #0f0; }
+        }
+
+        body {
+            background-color: black;
+            color: lime;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        h1 {
+            font-size: 40px;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 18px;
+            background: black;
+            color: lime;
+            border: 2px solid lime;
+            outline: none;
+        }
+
+        button:hover {
+            background: lime;
+            color: black;
+            cursor: pointer;
+        }
+
+        #result {
+            font-size: 30px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .big { color: cyan; }
+        .small { color: yellow; }
+        .red { color: red; }
+        .green { color: green; }
+        .violet { color: violet; }
+
+        /* Telegram Icon Style */
+        .telegram-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .telegram-icon:hover {
+            transform: scale(1.2);
+        }
+
+        /* Popup Modal */
+        .popup {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: black;
+            color: lime;
+            border: 2px solid lime;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            width: 200px;
+            font-size: 18px;
+        }
+
+        .popup a {
+            color: cyan;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .popup a:hover {
+            text-decoration: underline;
+        }
+
+        /* Developer Credit */
+        .developer {
+            margin-top: 30px;
+            font-size: 16px;
+        }
+
+        .developer a {
+            color: cyan;
+            text-decoration: none;
+        }
+
+        .developer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>HGZY HACK BY RS CYBER TEAM</h1>
+    <p>লাস্ট ৪ ডিজিট নাম্বার দিন:</p>
+    <input type="number" id="userInput" maxlength="4" placeholder="Ex: 1234">
+    <button onclick="generateResult()">Generate</button>
+    <div id="result"></div>
+
+    <!-- Telegram Icon -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" class="telegram-icon" onclick="togglePopup()">
+
+    <!-- Popup Modal -->
+    <div id="popup" class="popup">
+        <p>📩 Contact Us</p>
+        <a href="https://t.me/RS_CYBER_TEAM" target="_blank">🔹 Telegram</a>
+    </div>
+
+
+    <script>
+        function generateResult() {
+            let input = document.getElementById("userInput").value;
+            if (input.length !== 4) {
+                alert("দয়া করে ৪ ডিজিটের সংখ্যা দিন!");
+                return;
+            }
+
+            let sizeOptions = ["BIG", "SMALL"];
+            let colorOptions = ["RED", "GREEN", "VIOLET"];
+
+            let randomSize = sizeOptions[Math.floor(Math.random() * sizeOptions.length)];
+            let randomColor = colorOptions[Math.floor(Math.random() * colorOptions.length)];
+
+            document.getElementById("result").innerHTML = 
+                `<span class="${randomSize.toLowerCase()}">${randomSize}</span> <br> 
+                 <span class="${randomColor.toLowerCase()}">${randomColor}</span>`;
+        }
+
+        function togglePopup() {
+            let popup = document.getElementById("popup");
+            if (popup.style.display === "block") {
+                popup.style.display = "none";
+            } else {
+                popup.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
