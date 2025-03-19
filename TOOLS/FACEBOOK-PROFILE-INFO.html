@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Profile Info</title>
+    <style>
+        /* সুন্দর ব্যাকগ্রাউন্ড ডিজাইন */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            color: white;
+        }
+        .input-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .search-box {
+            display: flex;
+            width: 100%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            padding: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            border-radius: 50px;
+            background: transparent;
+            color: white;
+        }
+        input::placeholder {
+            color: #ddd;
+        }
+        button {
+            padding: 12px 20px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+        button:hover {
+            background: #ff4757;
+        }
+        /* সাদা ব্যাকগ্রাউন্ড সহ রেসপন্স কার্ড */
+        .container {
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: black;
+            margin: auto;
+        }
+        img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-top: -75px;
+            border: 5px solid white;
+        }
+        h2 {
+            margin-top: 10px;
+        }
+        p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        .verified {
+            color: red;
+            font-weight: bold;
+        }
+        /* Join Channel Button */
+        .join-btn {
+            margin-top: 20px;
+            padding: 12px 20px;
+            background: #28a745;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 50px;
+            transition: 0.3s ease;
+            display: inline-block;
+        }
+        .join-btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>FACEBOOK PROFILE LOOKUP</h1>
+
+    <div class="input-section">
+        <div class="search-box">
+            <input type="text" id="fbUrl" placeholder="Enter Facebook Profile URL">
+            <button onclick="fetchFBInfo()">🔍 Search</button>
+        </div>
+    </div>
+
+    <div id="profileContainer" class="container" style="display: none;">
+        <img id="coverPhoto" alt="Cover Photo">
+        <img id="profilePhoto" class="profile-img" alt="Profile Photo">
+        <h2 id="profileName"></h2> <!-- PROFILE_NAME ঠিক করা হয়েছে -->
+        <p><strong>Username:</strong> <span id="userName"></span></p>
+        <p><strong>Profile Name:</strong> <span id="profileRealName"></span></p> <!-- PROFILE_NAME নতুন করে যোগ -->
+        <p><strong>User ID:</strong> <span id="userID"></span></p>
+        <p><strong>Gender:</strong> <span id="gender"></span></p>
+        <p><strong>Followers:</strong> <span id="followers"></span></p>
+        <p><strong>Following:</strong> <span id="following"></span></p>
+        <p><strong>Verified Profile:</strong> <span id="verifiedStatus" class="verified"></span></p>
+        <p><strong>API Owner:</strong> <span id="apiOwner"></span></p>
+    </div>
+
+    <a href="https://t.me/RS_CYBER_TEAM" target="_blank" class="join-btn">Join Our Channel</a>
+
+    <script>
+        function fetchFBInfo() {
+            let fbUrl = document.getElementById("fbUrl").value;
+            if (!fbUrl) {
+                alert("Please enter a Facebook profile URL!");
+                return;
+            }
+
+            let apiUrl = `fbinfo.php?fbUrl=${encodeURIComponent(fbUrl)}`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        document.getElementById("profileContainer").style.display = "block";
+                        document.getElementById("coverPhoto").src = data.message.PHOTO.cover_photo.url;
+                        document.getElementById("profilePhoto").src = data.message.PHOTO.profile_photo.url;
+                        document.getElementById("profileName").innerText = data.message.PROFILE_NAME; // ঠিক করা হয়েছে
+                        document.getElementById("profileRealName").innerText = data.message.PROFILE_NAME; // PROFILE_NAME নতুন যোগ
+                        document.getElementById("userName").innerText = data.message.USER_NAME;
+                        document.getElementById("userID").innerText = data.message.USER_ID;
+                        document.getElementById("gender").innerText = data.message.GENDER;
+                        document.getElementById("followers").innerText = data.message.FOLLOWERS || "N/A";
+                        document.getElementById("following").innerText = data.message.FOLLOWING || "N/A";
+                        document.getElementById("verifiedStatus").innerText = data.message.IS_VERIFIED_PROFILE;
+                        document.getElementById("apiOwner").innerText = data.API_OWNER;
+                    } else {
+                        alert("Profile not found or invalid URL!");
+                    }
+                })
+                .catch(error => {
+                    alert("Error fetching data!");
+                    console.error(error);
+                });
+        }
+    </script>
+
+</body>
+</html>
