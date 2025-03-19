@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIN Generator</title>
+    <link href="https://fonts.googleapis.com/css?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #000;
+            color: #0f0;
+            font-family: 'VT323', monospace;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            text-shadow: 0 0 10px #0f0;
+        }
+        input, select {
+            width: 80%;
+            padding: 10px;
+            font-size: 18px;
+            background: black;
+            color: #0f0;
+            border: 2px solid #0f0;
+            text-align: center;
+            font-family: 'VT323', monospace;
+            margin-bottom: 10px;
+        }
+        .gen-btn, .copy-btn {
+            background: #0f0;
+            color: black;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            margin-top: 10px;
+        }
+        .gen-btn:hover, .copy-btn:hover {
+            background: #00ff00;
+            transform: scale(1.1);
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            text-shadow: 0 0 5px #0f0;
+        }
+        .bin-list {
+            margin-top: 10px;
+            text-align: left;
+            display: inline-block;
+            font-size: 18px;
+            width: 80%;
+        }
+        .bin-item {
+            padding: 8px;
+            border-bottom: 1px dashed #0f0;
+            display: block;
+        }
+        .copy-all {
+            margin-top: 20px;
+        }
+        footer {
+            margin-top: 20px;
+            color: #0f0;
+            font-size: 14px;
+            text-shadow: 0 0 10px #0f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>💳 BIN Generator</h1>
+
+    <input type="text" id="prefix" placeholder="Enter BIN Prefix (First 6 Digits)">
+    <input type="number" id="limit" placeholder="Enter Quantity (Max: 10000)" min="1" max="10000">
+
+    <select id="expiryDay">
+        <option value="">Select Expiry Day</option>
+    </select>
+
+    <select id="expiryMonth">
+        <option value="">Select Expiry Month</option>
+    </select>
+
+    <select id="expiryYear">
+        <option value="">Select Expiry Year</option>
+    </select>
+
+    <input type="text" id="cvv" placeholder="Enter CVV (3 Digits)" maxlength="3">
+
+    <button class="gen-btn" onclick="generateBIN()">Generate BIN</button>
+
+    <div id="result" class="result">Generated BINs:</div>
+    <div id="binList" class="bin-list"></div>
+
+    <button class="copy-btn copy-all" onclick="copyAllBINs()">Copy All</button>
+
+    <footer>© 2025 BIN Generator | Powered by <a href="https://t.me/RS_CYBER_TEAM" style="color: #0f0; text-decoration: none;">RS CYBER TEAM</a></footer>
+
+    <script>
+        function populateExpiryFields() {
+            let daySelect = document.getElementById("expiryDay");
+            let monthSelect = document.getElementById("expiryMonth");
+            let yearSelect = document.getElementById("expiryYear");
+
+            for (let i = 1; i <= 31; i++) {
+                let option = document.createElement("option");
+                option.value = i < 10 ? "0" + i : i;
+                option.textContent = option.value;
+                daySelect.appendChild(option);
+            }
+
+            for (let i = 1; i <= 12; i++) {
+                let option = document.createElement("option");
+                option.value = i < 10 ? "0" + i : i;
+                option.textContent = option.value;
+                monthSelect.appendChild(option);
+            }
+
+            let currentYear = new Date().getFullYear();
+            for (let i = 0; i < 10; i++) {
+                let option = document.createElement("option");
+                option.value = currentYear + i;
+                option.textContent = option.value;
+                yearSelect.appendChild(option);
+            }
+        }
+
+        populateExpiryFields();
+
+        function generateBIN() {
+            let prefix = document.getElementById("prefix").value.replace(/\s+/g, '');
+            let limit = parseInt(document.getElementById("limit").value);
+            let expiryDay = document.getElementById("expiryDay").value;
+            let expiryMonth = document.getElementById("expiryMonth").value;
+            let expiryYear = document.getElementById("expiryYear").value;
+            let cvv = document.getElementById("cvv").value;
+
+            if (prefix.length !== 6 || !/^\d+$/.test(prefix)) {
+                alert("❌ Invalid BIN Prefix! Must be 6 digits.");
+                return;
+            }
+            if (isNaN(limit) || limit < 1 || limit > 10000) {
+                alert("❌ Please enter a valid limit (1-10000).");
+                return;
+            }
+            if (expiryDay === "" || expiryMonth === "" || expiryYear === "") {
+                alert("❌ Please select an expiry date.");
+                return;
+            }
+            if (!/^\d{3}$/.test(cvv)) {
+                alert("❌ Invalid CVV! Must be 3 digits.");
+                return;
+            }
+
+            let binList = document.getElementById("binList");
+            binList.innerHTML = "";
+
+            let binTextList = [];
+
+            for (let i = 0; i < limit; i++) {
+                let bin = prefix + generateRandomDigits(9);
+                let validBIN = applyLuhnAlgorithm(bin);
+                let binText = `${validBIN} | ${expiryDay}/${expiryMonth}/${expiryYear} | CVV: ${cvv}`;
+                binTextList.push(binText);
+
+                let binItem = document.createElement("div");
+                binItem.className = "bin-item";
+                binItem.textContent = binText;
+                binList.appendChild(binItem);
+            }
+        }
+
+        function generateRandomDigits(length) {
+            let result = "";
+            for (let i = 0; i < length; i++) {
+                result += Math.floor(Math.random() * 10);
+            }
+            return result;
+        }
+
+        function applyLuhnAlgorithm(number) {
+            let sum = 0;
+            let alternate = false;
+            let digits = number.split("").map(Number);
+            
+            for (let i = digits.length - 1; i >= 0; i--) {
+                let n = digits[i];
+                if (alternate) {
+                    n *= 2;
+                    if (n > 9) n -= 9;
+                }
+                sum += n;
+                alternate = !alternate;
+            }
+
+            let checkDigit = (sum * 9) % 10;
+            return number + checkDigit;
+        }
+
+        function copyAllBINs() {
+            let bins = Array.from(document.querySelectorAll('.bin-item')).map(el => el.textContent).join("\n");
+            navigator.clipboard.writeText(bins).then(() => {
+                alert("✅ All BINs Copied!");
+            });
+        }
+    </script>
+</body>
+</html>
