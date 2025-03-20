@@ -1,0 +1,211 @@
+<html lang="en"><head>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCS ZIP CRACKER TOOL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&amp;family=Roboto:wght@300;400;700&amp;display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3em;
+            margin-top: 50px;
+            color: #00d4ff;
+            text-shadow: 0 0 10px #00d4ff, 0 0 20px #0083b0;
+            animation: glow 1.5s infinite;
+        }
+        
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8em;
+            margin-top: 50px;
+            color: #00d4ff;
+            text-shadow: 0 0 10px #00d4ff, 0 0 20px #0083b0;
+            animation: glow 1.5s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px #00d4ff, 0 0 20px #0083b0;
+            }
+            50% {
+                text-shadow: 0 0 20px #00d4ff, 0 0 30px #0083b0;
+            }
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 240;
+            overflow: hidden;
+            max-width: 55%;
+            margin: 20px auto;
+            border: 5px solid #00d4ff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 1);
+        }
+
+        .moonscape {
+            font-family: 'Courier New', Courier, monospace;
+            background: rgba(0, 0, 0, 0.8);
+            color: #00d4ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px auto;
+            display: inline-block;
+            text-align: left;
+            max-width: 90%;
+            word-wrap: break-word;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .moonscape:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(0, 212, 255, 1);
+        }
+
+        .download-buttons {
+            margin: 30px auto;
+        }
+
+        .download-buttons button {
+            background: linear-gradient(135deg, #0083b0, #00d4ff);
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            margin: 10px;
+            font-size: 1.2em;
+            font-family: 'Orbitron', sans-serif;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 131, 176, 0.8);
+        }
+
+        .download-buttons button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 131, 176, 1);
+            background: linear-gradient(135deg, #00d4ff, #0083b0);
+        }
+
+        .sparkles {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #00d4ff;
+            border-radius: 50%;
+            animation: sparkle 1.5s infinite ease-in-out;
+        }
+
+        @keyframes sparkle {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) translate(-50%, -50%);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2) translate(-50%, -50%);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.5) translate(-50%, -50%);
+            }
+        }
+
+        .background-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/45-degree-fabric-light.png');
+            background-size: 100% 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .background-particles:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.6), transparent);
+            top: 0;
+            left: 0;
+            z-index: -2;
+        }
+    </style>
+</head>
+<body>
+    <h1>TCS ZIP CRACKER TOOL</h1>
+
+    <div class="video-container">
+        <iframe src="https://player.vimeo.com/video/1043261075" frameborder="0" allowfullscreen=""></iframe>
+    </div>
+
+    <div class="moonscape">
+        "git clone https://github.com/termuxcommandstoretcs/zipcrackertcs<br>
+        cd zipcrackertcs<br>
+        python zipcrackertcs.py"
+    </div>
+<h2>PASSWORD LIST</h2>
+    <div class="download-buttons">
+        <button onclick="downloadFile('numeric4.txt')">Download numeric4.txt</button>
+        <button onclick="downloadFile('numeric5.txt')">Download numeric5.txt</button>
+        <button onclick="downloadFile('numeric6.txt')">Download numeric6.txt</button>
+    </div>
+
+    <div class="background-particles"></div>
+
+    <script>
+        function downloadFile(fileName) {
+            const link = document.createElement('a');
+            link.href = fileName; // Update this with the actual file path on your server
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Sparkles effect
+        const body = document.body;
+        setInterval(() => {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkles';
+            sparkle.style.left = `${Math.random() * 100}vw`;
+            sparkle.style.top = `${Math.random() * 100}vh`;
+            sparkle.style.animationDuration = `${Math.random() * 2 + 1}s`;
+            body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 2000);
+        }, 300);
+    </script>
+
+
+
+<div class="sparkles" style="left: 75.9118vw; top: 34.7599vh; animation-duration: 2.97083s;"></div><div class="sparkles" style="left: 76.9279vw; top: 50.5649vh; animation-duration: 2.88628s;"></div><div class="sparkles" style="left: 12.1441vw; top: 94.6763vh; animation-duration: 1.89866s;"></div><div class="sparkles" style="left: 7.7578vw; top: 84.8311vh; animation-duration: 1.81022s;"></div><div class="sparkles" style="left: 61.0003vw; top: 38.871vh; animation-duration: 2.04531s;"></div><div class="sparkles" style="left: 21.9344vw; top: 26.9534vh; animation-duration: 2.97615s;"></div><div class="sparkles" style="left: 20.1167vw; top: 49.9159vh; animation-duration: 2.67375s;"></div></body></html>
