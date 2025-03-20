@@ -1,0 +1,208 @@
+<html lang="en"><head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RS PLP Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&amp;family=VT323&amp;display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'VT323', monospace;
+            background: radial-gradient(circle, #000000, #0a0a0a);
+            color: #00ff00;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00ff00;
+            font-size: 3.5em;
+            text-align: center;
+            text-shadow: 0 0 20px #00ff00;
+            margin-bottom: 40px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .file-container {
+            background: linear-gradient(145deg, #1c1c1c, #2e2e2e);
+            border: 2px solid #00ff00;
+            border-radius: 15px;
+            width: 350px;
+            margin: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .file-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 25px #00ff00;
+        }
+
+        .file-logo {
+            width: 120px; 
+            height: 120px; 
+            border-radius: 50%;
+            border: 3px solid #00ff00;
+            margin-bottom: 15px;
+            box-shadow: 0 0 12px #00ff00;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .file-container:hover .file-logo {
+            transform: rotate(360deg) scale(1.1);
+            box-shadow: 0 0 20px #00ff00;
+        }
+
+        .file-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00ff00;
+            margin-bottom: 10px;
+        }
+
+        .price-tag {
+            color: #ff3333;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 12px 0;
+        }
+
+        .description {
+            font-size: 14px;
+            color: #cfcfcf;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        .download-link, .contact-btn {
+            font-family: 'VT323', monospace;
+            background: #222;
+            color: #00ff00;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 15px;
+            border: 2px solid #00ff00;
+            transition: background 0.3s ease, transform 0.2s ease;
+            display: block;
+        }
+
+        .download-link:hover, .contact-btn:hover {
+            background: #00ff00;
+            color: #000;
+            transform: scale(1.05);
+        }
+
+        .contact-btn {
+            background: #ff3333;
+            color: #fff;
+            margin-top: 10px;
+        }
+
+        .contact-btn:hover {
+            background: #ff5555;
+        }
+    </style>
+    <script src="password.js"></script>
+    <script>
+        function promptPassword(fileType, fileName, event) {
+            // Prevent the default link action
+            event.preventDefault();
+
+            const password = getPassword(fileType);
+            const userInput = prompt(`Enter the password for ${fileType}:`);
+
+            if (userInput === password) {
+                window.location.href = fileName;
+            } else {
+                alert("PLEASE CONTACT ADMIN. YOUR PASSWORD IS WRONG.");
+                // Redirect to the main page
+                window.location.href = "https://t.me/RS_CYBER_TEAM"; // Redirect to the main page
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>RS PLP COLLECTION</h1>
+
+    <!-- BD NID Container -->
+    <div class="file-container">
+        <img src="bdnid.jpg" alt="BD NID Logo" class="file-logo">
+        <div class="file-title">BD NID</div>
+        <div class="price-tag">100 TK</div>
+        <p class="description">এই plp দিয়ে BANGLADESHI NID কার্ড মেক করে ফেসবুক রিলেটেড সকল কাজ করতে পারবেন। যেমন: ফেসবুক আইডি ভেরিফিকেশন, লক আইডি ব্যাক পাশাপাশি স্প্যামিং এর সকল কাজে ব্যবহার করতে পারবেন। ফাইলটি কিনতে এডমিন কন্টাক্ট বাটন এ প্রেস করুন।</p>
+        <a href="bdnid.plp" class="download-link" onclick="promptPassword('BD_NID', 'bdnid.plp', event)">Download</a>
+        <a href="https://t.me/RS_CYBER_TEAM" class="contact-btn">Contact Admin</a>
+    </div>
+
+    <!-- INDIAN NID Container -->
+    <div class="file-container">
+        <img src="indiannid.jpg" alt="Indian NID Logo" class="file-logo">
+        <div class="file-title">INDIAN NID</div>
+        <div class="price-tag">100 TK</div>
+        <p class="description">এই plp দিয়ে INDIAN NID কার্ড মেক করে ফেসবুক রিলেটেড সকল কাজ করতে পারবেন। যেমন: ফেসবুক আইডি ভেরিফিকেশন, লক আইডি ব্যাক পাশাপাশি স্প্যামিং এর সকল কাজে ব্যবহার করতে পারবেন। ফাইলটি কিনতে এডমিন কন্টাক্ট বাটন এ প্রেস করুন।</p>
+        <a href="indiannid.plp" class="download-link" onclick="promptPassword('INDIAN_NID', 'indiannid.plp', event)">Download</a>
+        <a href="https://t.me/RS_CYBER_TEAM" class="contact-btn">Contact Admin</a>
+    </div>
+
+    <!-- Driving License Container -->
+    <div class="file-container">
+        <img src="dl.jpg" alt="Driving License Logo" class="file-logo">
+        <div class="file-title">DRIVING LICENSE</div>
+        <div class="price-tag">100 TK</div>
+        <p class="description">এই plp দিয়ে DRIVING LICENSE কার্ড মেক করে ফেসবুক রিলেটেড সকল কাজ করতে পারবেন। যেমন: ফেসবুক আইডি ভেরিফিকেশন, লক আইডি ব্যাক পাশাপাশি স্প্যামিং এর সকল কাজে ব্যবহার করতে পারবেন। ফাইলটি কিনতে এডমিন কন্টাক্ট বাটন এ প্রেস করুন।</p>
+        <a href="drivinglicense.plp" class="download-link" onclick="promptPassword('DRIVING_LICENSE', 'drivinglicense.plp', event)">Download</a>
+        <a href="https://t.me/RS_CYBER_TEAM" class="contact-btn">Contact Admin</a>
+    </div>
+
+    <!-- Death Certificate Container -->
+    <div class="file-container">
+        <img src="dc.jpg" alt="Death Certificate Logo" class="file-logo">
+        <div class="file-title">DEATH CERTIFICATE</div>
+        <div class="price-tag">100 TK</div>
+        <p class="description">এই plp দিয়ে DEATH CERTIFICATE কার্ড মেক করে ফেসবুক রিলেটেড সকল কাজ করতে পারবেন। যেমন: ফেসবুক আইডি ভেরিফিকেশন, লক আইডি ব্যাক পাশাপাশি স্প্যামিং এর সকল কাজে ব্যবহার করতে পারবেন। ফাইলটি কিনতে এডমিন কন্টাক্ট বাটন এ প্রেস করুন।</p>
+        <a href="deathcertificate.plp" class="download-link" onclick="promptPassword('DEATH_CERTIFICATE', 'deathcertificate.plp', event)">Download</a>
+        <a href="https://t.me/RS_CYBER_TEAM" class="contact-btn">Contact Admin</a>
+    </div>
+
+    <!-- BD Passport Container -->
+    <div class="file-container">
+        <img src="passport.jpg" alt="BD Passport Logo" class="file-logo">
+        <div class="file-title">BD PASSPORT (HAND HOLDING)</div>
+        <div class="price-tag">100 TK</div>
+        <p class="description">এই plp দিয়ে BD PASSPORT (HAND HOLDING) কার্ড মেক করে ফেসবুক রিলেটেড সকল কাজ করতে পারবেন। যেমন: ফেসবুক আইডি ভেরিফিকেশন, লক আইডি ব্যাক পাশাপাশি স্প্যামিং এর সকল কাজে ব্যবহার করতে পারবেন। ফাইলটি কিনতে এডমিন কন্টাক্ট বাটন এ প্রেস করুন।</p>
+        <a href="bdpassport.plp" class="download-link" onclick="promptPassword('BD_PASSPORT', 'bdpassport.plp', event)">Download</a>
+        <a href="https://t.me/RS_CYBER_TEAM" class="contact-btn">Contact Admin</a>
+    </div>
+
+    <!-- Student Card Container -->
+    <div class="file-container">
+        <img src="stcard.jpg" alt="Student Card Logo" class="file-logo">
+        <div class="file-title">STUDENT CARD (HAND HOLDING)</div>
+        <div class="price-tag">100 TK</div>
+        <p class="description">এই plp দিয়ে STUDENT CARD মেক করে ফেসবুক রিলেটেড সকল কাজ করতে পারবেন। যেমন: ফেসবুক আইডি ভেরিফিকেশন, লক আইডি ব্যাক পাশাপাশি স্প্যামিং এর সকল কাজে ব্যবহার করতে পারবেন। ফাইলটি কিনতে এডমিন কন্টাক্ট বাটন এ প্রেস করুন।</p>
+        <a href="studentIDhandholding.plp" class="download-link" onclick="promptPassword('STUDENT_CARD', 'studentIDhandholding.plp', event)">Download</a>
+        <a href="https://t.me/RS_CYBER_TEAM" class="contact-btn">Contact Admin</a>
+    </div>
+
+
+
+</body></html>
