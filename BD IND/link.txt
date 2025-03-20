@@ -1,0 +1,1 @@
+http://localhost:8080/nidapi/nid.php?img=https://i.ibb.co.com/G0mbYXh/images-5.jpg&name=শরিফা&name_en=Sorifa&baba=ভুধা&mom=আভাল&birth=10-oct-2000&nid=899999999&hold=300&address=চোদন,পারা,ধনখারা&sex=A-&dakgor=ভুধা&signature=Sorifa
