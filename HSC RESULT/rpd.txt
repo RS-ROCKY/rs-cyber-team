@@ -1,0 +1,229 @@
+<html lang="en"><head>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Protected</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #000;
+            color: #0f0;
+            text-align: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            color: #f00;
+            text-shadow: 0 0 10px #f00;
+            font-size: 3em;
+            animation: glitch 1.5s infinite;
+        }
+
+        @keyframes glitch {
+            0% {
+                text-shadow: 2px 2px #f00, -2px -2px #00f;
+            }
+            20% {
+                text-shadow: -2px -2px #f00, 2px 2px #00f;
+            }
+            40% {
+                text-shadow: 2px 2px #00f, -2px -2px #f00;
+            }
+            60% {
+                text-shadow: -2px -2px #f00, 2px 2px #00f;
+            }
+            80% {
+                text-shadow: 2px 2px #f00, -2px -2px #00f;
+            }
+            100% {
+                text-shadow: 2px 2px #f00, -2px -2px #00f;
+            }
+        }
+
+      
+        .container {
+            margin: auto;
+            padding: 20px;
+            background-color: rgba(20, 20, 20, 0.9);
+            border-radius: 10px;
+            display: inline-block;
+            border: 2px solid #f00;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+            max-width: 400px; 
+            width: 90%; 
+        }
+
+        form {
+            background-color: #111;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #f00;
+        }
+
+        input[type="password"] {
+            padding: 10px;
+            width: 100%; 
+            margin-bottom: 20px;
+            border: 1px solid #f00;
+            background-color: #222;
+            color: #0f0;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 30px;
+            background-color: #f00;
+            color: #0f0;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #ff3333;
+        }
+
+        .error {
+            color: #ff3333;
+            margin-top: 10px;
+        }
+
+        
+        .link-button {
+            display: inline-block;
+            background-color: #ff3333;
+            color: #0f0;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 1.1em;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .link-button:hover {
+            background-color: #f00;
+        }
+
+       
+        .caution-box {
+            margin-top: 50px;
+            padding: 15px;
+            background-color: rgba(255, 0, 0, 0.2);
+            color: #f00;
+            border: 2px solid #f00;
+            border-radius: 10px;
+            font-size: 1.1em;
+            line-height: 1.6;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+            text-align: left;
+            max-width: 400px; 
+            width: 90%; 
+            margin: auto; 
+        }
+
+        
+        .demo-image {
+            margin: 40px 0;
+        }
+
+        .demo-image img {
+            width: 100%; 
+            max-width: 300px; 
+            height: auto;
+            border: 2px solid #f00;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .demo-image img:hover {
+            transform: scale(1.05);
+        }
+
+        
+        .price-box {
+            background-color: rgba(255, 255, 0, 0.1);
+            border: 2px solid #ffcc00;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 30px;
+            font-size: 0.7em;
+            color: #ffcc00;
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.6);
+            text-align: left;
+            max-width: 400px; 
+            width: 90%; 
+            margin: auto; 
+        }
+
+        .price-box ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .price-box li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ILLEGAL DDOS ATTACK &amp; RDP TUTORIAL</h1>
+
+    
+    <div class="container">
+        <form action="password.php" method="POST">
+            <input type="password" name="password" placeholder="Enter Password" required=""><br>
+            <input type="submit" value="Submit">
+        </form>
+        
+        <!--?php if (isset($_GET['error'])): ?-->
+            <div class="error">Incorrect password. Try again.</div>
+        <!--?php endif; ?-->
+
+        
+        <a href="https://t.me/RS_CYBER_TEAM" class="link-button">Purchase Now</a>
+    </div>
+
+    
+    <div class="price-box">
+        <h2>Price: 399 TK</h2>
+        <h3>YOU WILL GET:</h3>
+        <ul>
+            <li>1. 4 WINDOWS RDP &amp; TOOLS</li>
+            <li>2. 1 LINUX RDP &amp; TOOLS</li>
+            <li>3. DDOS ATTACK TOOLS</li>
+        </ul>
+    </div>
+
+    
+    <div class="demo-image">
+        <p>DO YOU WANNA SEE ANY DEMO? PRESS THE BELOW PICTURE</p>
+        <a href="https://history-of-tcs-against-dictator.tiiny.site/" target="_blank">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRZRU_Csh74lAnV5qr7pA-b5mjUfdnYTFGiQ&amp;usqp=CAU" alt="Demo Image">
+        </a>
+    </div>
+
+    <p>DO YOU WANNA SEE MORE DEMO? JUST JOIN &amp; VISIT OUR CHANNEL REGULARLY.</p>
+
+    
+    <a href="https://t.me/RS_CYBER_TEAM" class="link-button">Join Now</a>
+
+    
+    <div class="caution-box">
+        <strong>Warning!</strong> Engaging in DDoS attacks is illegal and can lead to serious consequences, including fines and imprisonment. Distributed Denial of Service (DDoS) attacks are used to overwhelm servers and disrupt services, which can have a devastating impact on businesses and individuals.
+        <br><br>
+        You are responsible for your actions online. Make sure to understand the laws in your country before engaging in any form of hacking activity. Misuse of the information in these tutorials for malicious purposes could result in severe penalties.
+        <br><br>
+        <strong>Proceed with caution and at your own risk!</strong>
+    </div>
+
+
+
+
+</body></html>
