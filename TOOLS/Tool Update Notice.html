@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Update Notice</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: black;
+            color: white;
+            font-family: "Courier New", monospace;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 2rem;
+            text-shadow: 0 0 10px cyan;
+            animation: glow 1.5s infinite alternate;
+        }
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px cyan; }
+            100% { text-shadow: 0 0 15px cyan; }
+        }
+        .loading-text {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            animation: blink 1.2s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .btn {
+            font-size: 1.2rem;
+            padding: 12px 25px;
+            border: none;
+            background: linear-gradient(90deg, cyan, blue);
+            color: black;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-top: 30px;
+            transition: 0.3s ease-in-out;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 0 10px cyan;
+        }
+        .btn:hover {
+            background: linear-gradient(90deg, blue, cyan);
+            box-shadow: 0 0 15px cyan;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🔧 এই টুলসটা আপডেট হচ্ছে...</h1>
+    <p class="loading-text">আপডেট হয়ে গেলে জানিয়ে দেওয়া হবে!</p>
+    
+    <a href="https://t.me/RS_CYBER_TEAM" target="_blank" class="btn">📢 Join Telegram Channel</a>
+
+</body>
+  </html>
