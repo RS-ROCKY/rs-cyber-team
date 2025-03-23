@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HGZY HACK SYSTEM</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: black;
+            color: white;
+            font-family: "Courier New", monospace;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        h1 {
+            font-size: 2rem;
+            color: white;
+            text-shadow: 0 0 10px white;
+        }
+        .tv-screen {
+            width: 400px;
+            height: 250px;
+            background: #222;
+            border: 10px solid #666;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tv-glitch {
+            font-size: 50px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 5px white, 0 0 10px red, 0 0 15px blue;
+            animation: glitch 0.8s infinite alternate;
+        }
+        @keyframes glitch {
+            0% { transform: translateX(-2px); text-shadow: 0 0 5px white, 0 0 10px red, 0 0 15px blue; }
+            100% { transform: translateX(2px); text-shadow: 0 0 5px white, 0 0 10px blue, 0 0 15px red; }
+        }
+        .btn {
+            font-size: 1.2rem;
+            padding: 12px 25px;
+            border: none;
+            background: linear-gradient(90deg, white, gray);
+            color: black;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-top: 20px;
+            transition: 0.3s ease-in-out;
+            box-shadow: 0 0 10px white;
+        }
+        .btn:hover {
+            background: lightgray;
+            box-shadow: 0 0 15px white;
+        }
+        input {
+            font-size: 1.5rem;
+            padding: 15px;
+            width: 250px;
+            text-align: center;
+            border: 2px solid white;
+            border-radius: 10px;
+            background: black;
+            color: white;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px white;
+        }
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+        }
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            font-size: 1rem;
+            text-shadow: 0 0 5px white;
+        }
+        .footer a {
+            color: cyan;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer a:hover {
+            text-shadow: 0 0 10px cyan;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="bgCanvas"></canvas> <!-- ডট কানেক্টিং ব্যাকগ্রাউন্ড -->
+
+<div class="container">
+    <h1 id="loginTitle">UID দিয়ে লগইন করুন</h1>
+    <input type="text" id="uidInput" placeholder="Enter 6-digit UID" maxlength="6">
+    <button class="btn" onclick="login()">Login</button>
+
+    <div id="hackSection" style="display: none;">
+        <div class="tv-screen">
+            <div id="resultText" class="tv-glitch">-</div>
+        </div>
+        <h1>HGZY HACK BY RS CYBER TEAM</h1>
+        <button class="btn" onclick="startHacking()">START HACK</button>
+    </div>
+</div>
+
+<div class="footer">
+    Developer: <a href="https://t.me/RS_CYBER_TEAM" target="_blank">RS RABBY</a>
+</div>
+
+<script>
+    function login() {
+        let uid = document.getElementById("uidInput").value;
+        
+        if (uid.length !== 6 || isNaN(uid)) {
+            alert("Please enter a valid 6-digit UID!");
+            return;
+        }
+
+        document.getElementById("uidInput").style.display = "none";
+        document.getElementById("loginTitle").style.display = "none";
+        document.querySelector(".btn").style.display = "none";
+
+        document.getElementById("hackSection").style.display = "block";
+    }
+
+    function startHacking() {
+        document.getElementById("resultText").innerText = "WORKING...";
+        
+        setTimeout(() => {
+            let randomResult = Math.random() < 0.5 ? "SMALL" : "BIG";
+            document.getElementById("resultText").innerText = randomResult;
+        }, 3000);
+    }
+
+    // ডট এবং কানেকশন তৈরি করা
+    const canvas = document.getElementById("bgCanvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const dots = [];
+    const numDots = 50; // ডট সংখ্যা
+
+    class Dot {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.radius = 3; // ডট সাইজ
+            this.color = "white";
+            this.speedX = Math.random() * 2 - 1;
+            this.speedY = Math.random() * 2 - 1;
+        }
+
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+
+            if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+        }
+
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        }
+    }
+
+    function connectDots() {
+        for (let i = 0; i < dots.length; i++) {
+            for (let j = i + 1; j < dots.length; j++) {
+                let dx = dots[i].x - dots[j].x;
+                let dy = dots[i].y - dots[j].y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < 120) {
+                    ctx.beginPath();
+                    ctx.moveTo(dots[i].x, dots[i].y);
+                    ctx.lineTo(dots[j].x, dots[j].y);
+                    ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        dots.forEach(dot => {
+            dot.update();
+            dot.draw();
+        });
+
+        connectDots();
+        requestAnimationFrame(animate);
+    }
+
+    for (let i = 0; i < numDots; i++) {
+        dots.push(new Dot());
+    }
+
+    animate();
+</script>
+
+</body>
+</html>
