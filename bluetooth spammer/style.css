@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+h1 {
+    color: white;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#scan {
+    background-color: blue;
+    color: white;
+}
+
+#startSpam {
+    background-color: green;
+    color: white;
+}
+
+#stopSpam {
+    background-color: red;
+    color: white;
+}
