@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
+<?php
 // ID কার্ডের জন্য URL এবং টেমপ্লেট
 $image_url = isset($_GET['img']) ? htmlspecialchars($_GET['img']) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFq9Jr55blqVagearfl4qecKC-ek9Bdu2UAA&s';
 
@@ -107,5 +105,3 @@ $template_image = 'ss.jpg';
 // ID কার্ড তৈরি করা
 overlayImageFromURL($template_image, $image_url, $name, $name_en, $baba, $mom, $birth, $nid, $hold, $address, $sex, $dakgor, $signature);
 ?>
-</body>
-</html>
