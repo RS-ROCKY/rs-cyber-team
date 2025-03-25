@@ -3,50 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>সাইট বন্ধ</title>
+    <title>ID Card Maker</title>
     <style>
         body {
-            background-color: black;
-            color: neon green;
             font-family: Arial, sans-serif;
             text-align: center;
-            padding: 50px;
+            background-color: #f4f4f4;
+            padding: 20px;
         }
         .container {
-            border: 2px solid neon green;
+            background: white;
             padding: 20px;
             border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             display: inline-block;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
         }
-        h1 {
-            font-size: 28px;
+        h2 {
+            margin-bottom: 20px;
         }
-        p {
-            font-size: 20px;
-            margin: 10px 0;
-        }
-        .contact {
-            margin-top: 20px;
+        .start-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             font-size: 18px;
         }
-        .contact a {
-            color: neon green;
-            text-decoration: none;
-            font-weight: bold;
+        .start-btn:hover {
+            background-color: #218838;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>🚧 বর্তমানে RS CYBER TEAM TOOLS বন্ধ আছে 🚧</h1>
-        <p>দয়া করে কিছুক্ষণ পর আবার চেষ্টা করুন।</p>
-        <p>নয়তো এডমিনের সাথে যোগাযোগ করুন।</p>
-        <div class="contact">
-            📞 **এডমিন কন্টাক্ট:** <a href="https://t.me/RS_CYBER_TEAM" target="_blank">RS CYBER TEAM</a>
-        </div>
+        <h2>BD FACK NID কার্ড বানাতে স্টার্ট বাটনে ক্লিক করুন</h2>
+        <button class="start-btn" onclick="startIDCard()">Start</button>
     </div>
+
+    <script>
+        function startIDCard() {
+            window.location.href = "indexphp"; // এখানে তোমার PHP ফাইলের নাম বসাও
+        }
+    </script>
 
 </body>
 </html>
