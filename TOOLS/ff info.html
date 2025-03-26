@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Fire UID Info</title>
+    <style>
+        /* Body and Container */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-size: 1.1rem;
+            margin-right: 10px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 1.1rem;
+            width: 300px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        .image-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        /* User Information Section */
+        #userInfo {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+
+            input[type="text"] {
+                width: 250px;
+            }
+
+            button {
+                padding: 8px 16px;
+                font-size: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>RS FREE FIRE UID INFO</h1>
+        <p>Enter your Free Fire UID below to get the user information:</p>
+    </div>
+
+    <!-- Form to enter UID -->
+    <form id="uidForm">
+        <label for="uid">Free Fire UID:</label>
+        <input type="text" id="uid" name="uid" required>
+        <button type="submit">Get Info</button>
+    </form>
+
+    <div id="userInfo">
+        <h3>Account Information:</h3>
+        <table>
+            <tr>
+                <th>Account Name</th>
+                <td id="accountName"></td>
+            </tr>
+            <tr>
+                <th>Account UID</th>
+                <td id="accountUID"></td>
+            </tr>
+            <tr>
+                <th>Account Level</th>
+                <td id="accountLevel"></td>
+            </tr>
+            <tr>
+                <th>BR Rank</th>
+                <td id="brRank"></td>
+            </tr>
+            <tr>
+                <th>CS Rank</th>
+                <td id="csRank"></td>
+            </tr>
+            <tr>
+                <th>Last Login</th>
+                <td id="lastLogin"></td>
+            </tr>
+        </table>
+
+        <h3>Equipped Items:</h3>
+        <h4>Equipped Outfit:</h4>
+        <table id="equippedOutfit"></table>
+
+        <h4>Equipped Weapon:</h4>
+        <table id="equippedWeapon"></table>
+
+        <h3>Guild Information:</h3>
+        <table>
+            <tr>
+                <th>Guild Name</th>
+                <td id="guildName"></td>
+            </tr>
+            <tr>
+                <th>Guild Level</th>
+                <td id="guildLevel"></td>
+            </tr>
+            <tr>
+                <th>Guild Members</th>
+                <td id="guildMembers"></td>
+            </tr>
+            <tr>
+                <th>Guild Capacity</th>
+                <td id="guildCapacity"></td>
+            </tr>
+        </table>
+
+        <h3>Pet Information:</h3>
+        <table>
+            <tr>
+                <th>Pet Name</th>
+                <td id="petName"></td>
+            </tr>
+            <tr>
+                <th>Pet Level</th>
+                <td id="petLevel"></td>
+            </tr>
+            <tr>
+                <th>Pet EXP</th>
+                <td id="petEXP"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script>
+    document.getElementById('uidForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const uid = document.getElementById('uid').value;
+        fetchUserInfo(uid);
+    });
+
+    function fetchUserInfo(uid) {
+        const url = `http://api.not-perfect.xyz/ff-info.php?uid=${uid}`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    document.getElementById('accountName').textContent = data.AccountName;
+                    document.getElementById('accountUID').textContent = data.AccountUID;
+                    document.getElementById('accountLevel').textContent = data.AccountLevel;
+                    document.getElementById('brRank').textContent = data.BrRank;
+                    document.getElementById('csRank').textContent = data.CsRank;
+                    document.getElementById('lastLogin').textContent = data.AccountLastLogin;
+
+                    let outfitHTML = '';
+                    data['Equipped Items']['Equipped Outfit'].forEach(item => {
+                        outfitHTML += `<tr><td>${item['Items ID']}</td><td><img src="${item['Items Icon']}" class="image-icon" alt="Item Icon"></td></tr>`;
+                    });
+                    document.getElementById('equippedOutfit').innerHTML = outfitHTML;
+
+                    let weaponHTML = '';
+                    data['Equipped Items']['Equipped Weapon'].forEach(weapon => {
+                        weaponHTML += `<tr><td>${weapon['Items ID']}</td><td><img src="${weapon['Items Icon']}" class="image-icon" alt="Weapon Icon"></td></tr>`;
+                    });
+                    document.getElementById('equippedWeapon').innerHTML = weaponHTML;
+
+                    document.getElementById('guildName').textContent = data['Guild Information'].GuildName;
+                    document.getElementById('guildLevel').textContent = data['Guild Information'].GuildLevel;
+                    document.getElementById('guildMembers').textContent = data['Guild Information'].GuildMember;
+                    document.getElementById('guildCapacity').textContent = data['Guild Information'].GuildCapacity;
+
+                    document.getElementById('petName').textContent = data['Pet Information'].PetName;
+                    document.getElementById('petLevel').textContent = data['Pet Information'].PetLevel;
+                    document.getElementById('petEXP').textContent = data['Pet Information'].PetEXP;
+
+                    document.getElementById('userInfo').style.display = 'block';
+                } else {
+                    alert('Error fetching data, please check the UID.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to fetch data.');
+            });
+    }
+</script>
+
+</body>
+  </html>
