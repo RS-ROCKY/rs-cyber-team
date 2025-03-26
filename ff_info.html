@@ -3,193 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Fire Info</title>
+    <title>Free Fire UID Information</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #121212;
-            color: #00ff00;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
         }
-
-        h1 {
-            color: #00ff00;
-            text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
-            margin-bottom: 20px;
-        }
-
-        input[type="text"] {
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-            background-color: #1a1a1a;
-            color: #00ff00;
-            outline: none;
-            width: 300px;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-        }
-
-        button {
-            padding: 10px 15px;
-            background-color: #00ff00;
-            color: black;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #00e600;
-        }
-
-        .result {
+        table {
+            width: 100%;
+            border-collapse: collapse;
             margin-top: 20px;
-            background-color: #1a1a1a;
-            padding: 15px;
-            border-radius: 5px;
-            width: 400px;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
-            display: none;
+            border: 1px solid #ddd;
         }
-
-        .result p {
-            margin: 5px 0;
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
         }
-
-        .result img {
-            width: 50px;
-            height: 50px;
-            margin-right: 10px;
+        th {
+            background-color: #4CAF50;
+            color: white;
         }
-
-        .equipped-items img {
-            width: 30px;
-            height: 30px;
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        #loading {
+            display: block;
+            font-size: 20px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
-<h1>Free Fire Info</h1>
-<form id="uidForm">
-    <input type="text" id="uid" placeholder="Enter UID" required>
-    <button type="submit">Get Info</button>
-</form>
+<h2>Free Fire UID Information</h2>
 
-<div class="result" id="result">
-    <p><strong>Name:</strong> <span id="accountName"></span></p>
-    <p><strong>Level:</strong> <span id="accountLevel"></span></p>
-    <p><strong>Account Created:</strong> <span id="accountCreateTime"></span></p>
-    <p><strong>Last Login:</strong> <span id="accountLastLogin"></span></p>
-    <p><strong>Region:</strong> <span id="accountRegion"></span></p>
-    <p><strong>Language:</strong> <span id="accountLanguage"></span></p>
-    <p><strong>Likes:</strong> <span id="accountLikes"></span></p>
-    <p><strong>Signature:</strong> <span id="accountSignature"></span></p>
-    <p><strong>Max Rank:</strong> <span id="brMaxRank"></span></p>
-    <p><strong>Current Rank:</strong> <span id="brRank"></span></p>
-    <p><strong>Equipped Outfit:</strong>
-        <span id="equippedOutfit"></span>
-    </p>
-    <p><strong>Equipped Weapon:</strong>
-        <span id="equippedWeapon"></span>
-    </p>
-    <p><strong>Equipped Skills:</strong> <span id="equippedSkills"></span></p>
-    <p><strong>Guild Name:</strong> <span id="guildName"></span></p>
-    <p><strong>Guild Owner:</strong> <span id="guildOwner"></span></p>
-    <p><strong>Guild Members:</strong> <span id="guildMember"></span></p>
-    <p><strong>Pet Level:</strong> <span id="petLevel"></span></p>
-    <p><strong>Pet Name:</strong> <span id="petName"></span></p>
+<!-- Display User Information -->
+<div id="loading">Loading...</div>
+<div id="userInfo" style="display:none;">
+    <h2>Account Information</h2>
+    <table id="infoTable">
+        <tr>
+            <th>Field</th>
+            <th>Value</th>
+        </tr>
+    </table>
+
+    <h3>Equipped Items</h3>
+    <table id="equippedItems">
+        <tr>
+            <th>Outfit Item ID</th>
+            <th>Outfit Item Icon</th>
+        </tr>
+    </table>
+
+    <h3>Equipped Weapon</h3>
+    <table id="equippedWeapon">
+        <tr>
+            <th>Weapon Item ID</th>
+            <th>Weapon Item Icon</th>
+        </tr>
+    </table>
 </div>
 
 <script>
-    document.getElementById('uidForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const uid = document.getElementById('uid').value.trim();
-        const resultDiv = document.getElementById('result');
-        const accountName = document.getElementById('accountName');
-        const accountLevel = document.getElementById('accountLevel');
-        const accountCreateTime = document.getElementById('accountCreateTime');
-        const accountLastLogin = document.getElementById('accountLastLogin');
-        const accountRegion = document.getElementById('accountRegion');
-        const accountLanguage = document.getElementById('accountLanguage');
-        const accountLikes = document.getElementById('accountLikes');
-        const accountSignature = document.getElementById('accountSignature');
-        const brMaxRank = document.getElementById('brMaxRank');
-        const brRank = document.getElementById('brRank');
-        const equippedOutfit = document.getElementById('equippedOutfit');
-        const equippedWeapon = document.getElementById('equippedWeapon');
-        const equippedSkills = document.getElementById('equippedSkills');
-        const guildName = document.getElementById('guildName');
-        const guildOwner = document.getElementById('guildOwner');
-        const guildMember = document.getElementById('guildMember');
-        const petLevel = document.getElementById('petLevel');
-        const petName = document.getElementById('petName');
-
-        if (!uid) {
-            alert("Please enter a valid UID.");
-            return;
+// JSON Data
+const user_info = {
+    "AccountAvatarId": 901044004,
+    "AccountBPID": 1001000082,
+    "AccountBannerId": 902000051,
+    "AccountCreateTime": "01/12/2020 : 02:33:35 AM",
+    "AccountEXP": 1178663,
+    "AccountLanguage": "Language_English",
+    "AccountLastLogin": "05/02/2025 : 07:13:37 AM",
+    "AccountLevel": 61,
+    "AccountLikes": 6165,
+    "AccountName": "RsメＩｔａｃｈｉ☂-",
+    "AccountPinId": 910031007,
+    "AccountPreferMode": "prefermode_BR",
+    "AccountRegion": "BD",
+    "AccountSeasonId": 44,
+    "AccountType": 1,
+    "AccountUID": 2588705571,
+    "BrMaxRank": 301,
+    "BrRank": "Đồng I",
+    "CsMaxRank": 217,
+    "CsRank": "Kim cương 3 (1⭐)",
+    "Equipped Items": {
+        "Equipped Outfit": [
+            {
+                "Items ID": 211035049,
+                "Items Icon": "https://api.ffcommunity.site/assets/library/icons/211035049.png"
+            },
+            {
+                "Items ID": 205000051,
+                "Items Icon": "https://api.ffcommunity.site/assets/library/icons/205000051.png"
+            },
+            {
+                "Items ID": 204000181,
+                "Items Icon": "https://api.ffcommunity.site/assets/library/icons/204000181.png"
+            },
+            {
+                "Items ID": 203046040,
+                "Items Icon": "https://api.ffcommunity.site/assets/library/icons/203046040.png"
+            },
+            {
+                "Items ID": 211037058,
+                "Items Icon": "https://api.ffcommunity.site/assets/library/icons/211037058.png"
+            },
+            {
+                "Items ID": 214000022,
+                "Items Icon": "https://api.ffcommunity.site/assets/library/icons/214000022.png"
+            }
+        ],
+        "Equipped Weapon": [
+            {
+                "Items ID": 907103029,
+                "Items Icon": "https://api.ffcommunity.site/assets/library/icons/907103029.png"
+            },
+            {
+                "Items ID": 912044001,
+                "Items Icon": "https://api.ffcommunity.site/assets/library/icons/912044001.png"
+            },
+            {
+                "Items ID": 914044001,
+                "Items Icon": "https://api.ffcommunity.site/assets/library/icons/914044001.png"
+            }
+        ],
+        "EquippedOutfit": [
+            211035049,
+            205000051,
+            204000181,
+            203046040,
+            211037058,
+            214000022
+        ],
+        "EquippedSkills": "Maxim (P), Miguel (P)"
+    },
+    "EquippedTittle": 904290048,
+    "EquippedWeapon": [
+        907103029,
+        912044001,
+        914044001
+    ],
+    "Guild Information": {
+        "GuildCapacity": 40,
+        "GuildID": "3068609645",
+        "GuildLevel": 2,
+        "GuildMember": 25,
+        "GuildName": "☯AKATSUI☯",
+        "GuildOwner": -1706261725,
+        "LeaderInfo": {
+            "AvatarId": 902000051,
+            "BrRankPoint": 1000,
+            "CreateTime": 901044004,
+            "CsRankPoint": 67,
+            "EquippedWeapon": [
+                907103029,
+                912044001,
+                914044001
+            ],
+            "LastLogin": 1738739617,
+            "LeaderEXP": 1178663,
+            "LeaderLevel": 61,
+            "LeaderName": "RsメＩｔａｃｈｉ☂-",
+            "LeaderRegion": "BD",
+            "LeaderUID": "2588705571",
+            "ReleaseVersion": "OB47"
         }
+    },
+    "Pet Information": {
+        "Equipped?": 1,
+        "PetEXP": 3288,
+        "PetID": 1300000123,
+        "PetLevel": 6,
+        "PetName": 0,
+        "SkillsID": 1315000012,
+        "SkinID": 1310000232
+    },
+    "ReleaseVersion": "OB47",
+    "ShowCsRank": true
+};
 
-        const apiUrl = `http://api.not-perfect.xyz/ff-info.php?uid=${uid}`;
+// Function to populate the user information in the table
+function populateTable() {
+    // Hide loading text
+    document.getElementById('loading').style.display = 'none';
+    // Show user info section
+    document.getElementById('userInfo').style.display = 'block';
+    
+    // Get the table where data will be displayed
+    let infoTable = document.getElementById('infoTable');
+    
+    // Function to add data into the table
+    function addRow(key, value) {
+        let row = infoTable.insertRow();
+        let cell1 = row.insertCell(0);
+        let cell2 = row.insertCell(1);
+        cell1.textContent = key;
+        cell2.textContent = value;
+    }
 
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                if (data.AccountName) {
-                    resultDiv.style.display = 'block';
-                    accountName.textContent = data.AccountName || 'N/A';
-                    accountLevel.textContent = data.AccountLevel || 'N/A';
-                    accountCreateTime.textContent = data.AccountCreateTime || 'N/A';
-                    accountLastLogin.textContent = data.AccountLastLogin || 'N/A';
-                    accountRegion.textContent = data.AccountRegion || 'N/A';
-                    accountLanguage.textContent = data.AccountLanguage || 'N/A';
-                    accountLikes.textContent = data.AccountLikes || 'N/A';
-                    accountSignature.textContent = data.AccountSignature || 'N/A';
-                    brMaxRank.textContent = data.BrMaxRank || 'N/A';
-                    brRank.textContent = data.BrRank || 'N/A';
-                    
-                    // Display equipped items
-                    equippedOutfit.innerHTML = '';
-                    data['Equipped Items']['Equipped Outfit'].forEach(item => {
-                        const img = document.createElement('img');
-                        img.src = item['Items Icon'];
-                        equippedOutfit.appendChild(img);
-                    });
-                    
-                    equippedWeapon.innerHTML = '';
-                    data['Equipped Items']['Equipped Weapon'].forEach(item => {
-                        const img = document.createElement('img');
-                        img.src = item['Items Icon'];
-                        equippedWeapon.appendChild(img);
-                    });
-
-                    equippedSkills.textContent = data['Equipped Items']['EquippedSkills'] || 'N/A';
-                    guildName.textContent = data.GuildInformation.GuildName || 'N/A';
-                    guildOwner.textContent = data.GuildInformation.LeaderInfo.LeaderName || 'N/A';
-                    guildMember.textContent = data.GuildInformation.GuildMember || 'N/A';
-                    petLevel.textContent = data.PetInformation.PetLevel || 'N/A';
-                    petName.textContent = data.PetInformation.PetName || 'N/A';
-                } else {
-                    alert("Error: " + data.message);
-                    resultDiv.style.display = 'none';
-                }
-            })
-            .catch(error => {
-                console.error("Error fetching data: ", error);
-                alert("An error occurred while fetching data.");
-                resultDiv.style.display = 'none';
-            });
+    // Add main information fields
+    addRow("Account Avatar ID", user_info.AccountAvatarId);
+    addRow("Account Name", user_info.AccountName);
+    addRow("Account UID", user_info.AccountUID);
+    addRow("Account Level", user_info.AccountLevel);
+    addRow("BR Rank", user_info.BrRank);
+    addRow("Account Language", user_info.AccountLanguage);
+    addRow("Account Last Login", user_info.AccountLastLogin);
+    addRow("Account Region", user_info.AccountRegion);
+    addRow("Account Type", user_info.AccountType);
+    
+    // Handle Equipped Items (Outfit and Weapon)
+    let equippedOutfit = user_info['Equipped Items'].EquippedOutfit;
+    let outfitTable = document.getElementById('equippedItems');
+    equippedOutfit.forEach(item => {
+        let row = outfitTable.insertRow();
+        let cell1 = row.insertCell(0);
+        let cell2 = row.insertCell(1);
+        cell1.textContent = item['Items ID'];
+        cell2.innerHTML = `<img src="${item['Items Icon']}" alt="Item Icon" width="50">`;
     });
+
+    let equippedWeapon = user_info['Equipped Items'].EquippedWeapon;
+    let weaponTable = document.getElementById('equippedWeapon');
+    equippedWeapon.forEach(item => {
+        let row = weaponTable.insertRow();
+        let cell1 = row.insertCell(0);
+        let cell2 = row.insertCell(1);
+        cell1.textContent = item['Items ID'];
+        cell2.innerHTML = `<img src="${item['Items Icon']}" alt="Weapon Icon" width="50">`;
+    });
+}
+
+// Call the function to populate the table with data
+populateTable();
 </script>
 
 </body>
