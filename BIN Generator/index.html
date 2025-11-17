@@ -1,0 +1,364 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>BIN Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Generate credit card numbers for testing purposes - TeamCSB Tools">
+  <meta name="keywords" content="cc generator, credit card generator, bin generator, teamcsb">
+  <meta name="author" content="TeamCSB">
+  
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#06b6d4">
+  
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style_1.css">
+
+  <!-- Font Awesome (icons) -->
+  <link rel="stylesheet" href="css/all.min.css" referrerpolicy="no-referrer">
+        
+  <!-- Header -->
+
+  <!-- Main Content -->
+  <main class="main">
+    <!-- CC Generator Section -->
+    <section class="section">
+      <h2><i class="fas fa-credit-card"></i> Credit Card Generator</h2>
+      
+      <div class="cc-generator-container">
+        <div class="generator-form">
+          <div id="app">
+            <form-generator></form-generator>
+            <generated-credit-cards></generated-credit-cards>
+          </div>
+          <button type="button" class="copy-btn" onclick="copy()">
+            <i class="fas fa-copy"></i> Copy Cards
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="section info-section">
+      <h3><i class="fas fa-info-circle"></i> Important Notice</h3>
+      <div class="info-card">
+        <p><i class="fas fa-exclamation-triangle"></i> These generated credit card numbers are for testing purposes only and should not be used for any illegal activities.</p>
+        <p><i class="fas fa-shield-alt"></i> All generated data is completely random and does not represent real credit card information.</p>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section features-section">
+      <h3><i class="fas fa-star"></i> Features</h3>
+      <div class="features-grid">
+        <div class="feature-card">
+          <i class="fas fa-random"></i>
+          <h4>Random Generation</h4>
+          <p>Generate completely random credit card numbers with valid format</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-check-circle"></i>
+          <h4>Valid Format</h4>
+          <p>All generated numbers follow standard credit card number format</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-shield-alt"></i>
+          <h4>Safe Testing</h4>
+          <p>Perfect for testing payment systems and form validations</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-copy"></i>
+          <h4>Easy Copy</h4>
+          <p>One-click copy functionality for generated card numbers</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Vue.js (main framework) -->
+  <script src="js/vue.js"></script>
+  
+  <!-- Main JavaScript -->
+  <script src="js/main.js"></script>
+
+  <!-- Copy functionality -->
+  <script>
+    function copy() {
+      // Multiple selectors to catch different card structures
+      let cards = document.querySelectorAll('.generated-card, .card, .cc-card, .credit-card');
+      let copyText = '';
+      
+      // If no cards found with those classes, try finding by common patterns
+      if (cards.length === 0) {
+        // Look for any elements that might contain card data
+        const possibleCards = document.querySelectorAll('[class*="card"], [class*="generated"], .list-group-item');
+        cards = Array.from(possibleCards).filter(el => {
+          const text = el.textContent;
+          // Check if element contains card-like number pattern
+          return /\d{4}[\s-]*\d{4}[\s-]*\d{4}[\s-]*\d{4}/.test(text);
+        });
+      }
+      
+      // Extract text from cards
+      if (cards.length > 0) {
+        cards.forEach(card => {
+          const cardText = card.textContent || card.innerText;
+          
+          // Try to extract card number, expiry, and CVV from text
+          const numberMatch = cardText.match(/(\d{4}[\s-]*\d{4}[\s-]*\d{4}[\s-]*\d{4})/);
+          const expiryMatch = cardText.match(/(\d{2}\/\d{2,4}|\d{2}-\d{2,4})/);
+          const cvvMatch = cardText.match(/CVV?:?\s*(\d{3,4})/i);
+          
+          if (numberMatch) {
+            const number = numberMatch[1].replace(/[\s-]/g, '');
+            const expiry = expiryMatch ? expiryMatch[1] : '12/27';
+            const cvv = cvvMatch ? cvvMatch[1] : '123';
+            copyText += `${number}|${expiry}|${cvv}\n`;
+          }
+        });
+      }
+      
+      // Fallback: try to get data from Vue instance
+      if (!copyText && window.Vue) {
+        try {
+          const app = document.querySelector('#app').__vue__;
+          if (app && app.$children) {
+            const creditCardsComponent = app.$children.find(child => 
+              child.$options.name === 'generated-credit-cards' || 
+              child.$options._componentTag === 'generated-credit-cards' ||
+              (child.generatedCreditCards && Array.isArray(child.generatedCreditCards))
+            );
+            
+            if (creditCardsComponent && creditCardsComponent.generatedCreditCards) {
+              creditCardsComponent.generatedCreditCards.forEach(card => {
+                copyText += `${card.number}|${card.expiry}|${card.cvv}\n`;
+              });
+            }
+          }
+        } catch (e) {
+          console.log('Vue data extraction failed:', e);
+        }
+      }
+      
+      // Fallback: check for textarea with generated data
+      if (!copyText) {
+        const textarea = document.querySelector('textarea');
+        if (textarea && textarea.value.trim()) {
+          copyText = textarea.value.trim();
+        }
+      }
+      
+      // Final fallback: look for any text that looks like card data
+      if (!copyText) {
+        const allText = document.body.textContent;
+        const cardMatches = allText.match(/\d{4}[\s-]*\d{4}[\s-]*\d{4}[\s-]*\d{4}/g);
+        if (cardMatches && cardMatches.length > 0) {
+          cardMatches.forEach(match => {
+            const cleanNumber = match.replace(/[\s-]/g, '');
+            copyText += `${cleanNumber}|12/27|123\n`;
+          });
+        }
+      }
+      
+      // Copy to clipboard
+      if (copyText) {
+        // Try modern clipboard API first
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(copyText.trim()).then(() => {
+            showCopySuccess();
+          }).catch(err => {
+            console.error('Clipboard API failed:', err);
+            fallbackCopy(copyText.trim());
+          });
+        } else {
+          fallbackCopy(copyText.trim());
+        }
+      } else {
+        alert('No credit card data found to copy!');
+      }
+    }
+    
+    function fallbackCopy(text) {
+      // Create temporary textarea for copying
+      const tempTextarea = document.createElement('textarea');
+      tempTextarea.value = text;
+      tempTextarea.style.position = 'fixed';
+      tempTextarea.style.left = '-999999px';
+      tempTextarea.style.top = '-999999px';
+      document.body.appendChild(tempTextarea);
+      tempTextarea.focus();
+      tempTextarea.select();
+      
+      try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+          showCopySuccess();
+        } else {
+          alert('Copy failed! Please try again.');
+        }
+      } catch (err) {
+        console.error('Fallback copy failed:', err);
+        alert('Copy not supported by your browser. Please select and copy manually.');
+      }
+      
+      document.body.removeChild(tempTextarea);
+    }
+    
+    function showCopySuccess() {
+      const btn = document.querySelector('.copy-btn');
+      if (btn) {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.style.background = '#10b981';
+        btn.disabled = true;
+        
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 2000);
+      } else {
+        // Show toast notification if button not found
+        showToast('Credit cards copied to clipboard!');
+      }
+    }
+    
+    function showToast(message) {
+      // Create toast notification
+      const toast = document.createElement('div');
+      toast.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #10b981;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        z-index: 9999;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        animation: slideIn 0.3s ease-out;
+      `;
+      toast.textContent = message;
+      
+      // Add animation styles
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes slideIn {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+      `;
+      document.head.appendChild(style);
+      
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.remove();
+        style.remove();
+      }, 3000);
+    }
+
+    // Search functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('menuSearch');
+      const menuItems = document.querySelectorAll('#menuList a, #menuList .accordion-header, #menuList .subsection-header');
+
+      searchInput?.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        
+        menuItems.forEach(item => {
+          const text = item.textContent.toLowerCase();
+          const parent = item.closest('.accordion-content, .dropdown-content');
+          
+          if (text.includes(searchTerm)) {
+            item.style.display = 'flex';
+            if (parent) parent.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+
+      // Debug and monitor for generated cards
+      setTimeout(() => {
+        console.log('🔍 Checking for generated cards...');
+        
+        // Check different possible selectors
+        const selectors = [
+          '.generated-card', '.card', '.cc-card', '.credit-card',
+          '[class*="card"]', '[class*="generated"]', '.list-group-item'
+        ];
+        
+        selectors.forEach(selector => {
+          const elements = document.querySelectorAll(selector);
+          if (elements.length > 0) {
+            console.log(`✅ Found ${elements.length} elements with selector: ${selector}`);
+            elements.forEach((el, index) => {
+              const text = el.textContent.substring(0, 100);
+              console.log(`  Card ${index + 1}: ${text}...`);
+            });
+          }
+        });
+
+        // Check for card number patterns in page
+        const pageText = document.body.textContent;
+        const cardNumbers = pageText.match(/\d{4}[\s-]*\d{4}[\s-]*\d{4}[\s-]*\d{4}/g);
+        if (cardNumbers) {
+          console.log(`💳 Found ${cardNumbers.length} card number patterns:`, cardNumbers);
+        }
+
+        // Check Vue instance
+        const app = document.querySelector('#app');
+        if (app && app.__vue__) {
+          console.log('🔧 Vue app found:', app.__vue__);
+          const vueData = app.__vue__.$data;
+          console.log('📊 Vue data:', vueData);
+        }
+      }, 3000);
+
+      // Set up mutation observer to detect when cards are added
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.type === 'childList') {
+            mutation.addedNodes.forEach((node) => {
+              if (node.nodeType === 1) { // Element node
+                const cardLikeText = node.textContent;
+                if (cardLikeText && /\d{4}[\s-]*\d{4}[\s-]*\d{4}[\s-]*\d{4}/.test(cardLikeText)) {
+                  console.log('🆕 New card detected:', cardLikeText.substring(0, 50));
+                  
+                  // Update copy button to show cards are available
+                  const copyBtn = document.querySelector('.copy-btn');
+                  if (copyBtn && !copyBtn.classList.contains('has-cards')) {
+                    copyBtn.classList.add('has-cards');
+                    copyBtn.style.animation = 'pulse 2s infinite';
+                  }
+                }
+              }
+            });
+          }
+        });
+      });
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    });
+
+    // Add pulse animation for copy button
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes pulse {
+        0% { box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25); }
+        50% { box-shadow: 0 4px 20px rgba(16, 185, 129, 0.5); }
+        100% { box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25); }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+  <script src="js/script.js"></script>
+
+
+</body></html>
